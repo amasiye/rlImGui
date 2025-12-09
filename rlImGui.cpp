@@ -264,6 +264,15 @@ static void SetupMouseCursors(void)
 void SetupFontAwesome(void)
 {
 #ifndef NO_FONT_AWESOME
+
+    ImGuiIO &io = ImGui::GetIO();
+
+    // Ensure we have a base font before merging icon font
+    if (io.Fonts->Fonts.empty())
+    {
+        io.Fonts->AddFontDefault();
+    }
+
     static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
     ImFontConfig icons_config;
     icons_config.MergeMode = true;
@@ -276,8 +285,6 @@ void SetupFontAwesome(void)
     icons_config.OversampleV = 1;
 
     icons_config.GlyphRanges = icons_ranges;
-
-    ImGuiIO& io = ImGui::GetIO();
 
     float size = FONT_AWESOME_ICON_SIZE;
 #if !defined(__APPLE__)
