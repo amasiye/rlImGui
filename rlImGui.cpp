@@ -730,6 +730,7 @@ void ImGui_ImplRaylib_UpdateTexture(ImTextureData* tex)
             Texture* texture = (Texture*)MemAlloc(sizeof(Texture));
             tex->BackendUserData = texture;;
             *texture = LoadTextureFromImage(img);
+            SetTextureFilter(*texture, TEXTURE_FILTER_BILINEAR);
             tex->SetTexID(ImTextureID(texture->id));
             tex->Status = ImTextureStatus_OK;
         }
